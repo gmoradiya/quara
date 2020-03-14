@@ -12,9 +12,14 @@ class User < ApplicationRecord
   has_many :questions
   has_many :answers
   has_many :topics
+  has_many :topic_followers
 
 
   def is_following?(user)
     followings.where(id: user.id).any?
+  end
+
+  def is_following_topic?(topic)
+    topic_followers.where(topic_id: topic.id).any?
   end
 end

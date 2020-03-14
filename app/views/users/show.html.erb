@@ -27,4 +27,15 @@
     <br/>
   Ans. <%= a.answer%>
   <br/>
+  <br/>
+<%end%>
+
+<hr/>
+
+<h4> Topics followed by users <h4>
+
+<% @user.topic_followers.each do |follow|%>
+    <%=  follow.topic.name %>
+    <br/>
+  <br/>
 <%end%>

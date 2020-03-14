@@ -1,5 +1,8 @@
 </br>
-  <strong><%=@question.question%></strong>
+  <strong>
+    <%=@question.question%>
+    <%= link_to "Edit", edit_question_path(@question) if @question.user == current_user%>
+  </strong>
   </br>
   created by <%= link_to @question.user.email, user_path(@question.user)%>
 
@@ -7,7 +10,7 @@
   <% @question.answers.each do |answer|%>
     <%= answer.answer %>
      By 
-    <%= link_to answer.user.email, user_path(answer.user)%>
+    <%= link_to answer.user == current_user ? "You" : answer.user.email, user_path(answer.user)%>
     </br>
     </br>
   <%end%>
@@ -21,3 +24,6 @@
     <%= ans.submit "Save"%>
   <% end%>
   <hr/>
+
+  <%= link_to "Back", questions_path%>
+

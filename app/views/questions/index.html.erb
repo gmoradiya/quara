@@ -1,5 +1,6 @@
-</br>
-
+<%= link_to "Follow Users", users_path%>
+<%= link_to "Follow Topics, topics_path"%>
+<hr/>
 <%= link_to "Add Question", new_question_path%>
 
 </br>
@@ -17,7 +18,7 @@
   <% question.answers.each do |answer|%>
     <%= answer.answer %>
      By 
-    <%= link_to answer.user.email, user_path(answer.user)%>
+    <%= link_to answer.user == current_user ? "You" : answer.user.email, user_path(answer.user)%>
     </br>
     </br>
   <%end%>
