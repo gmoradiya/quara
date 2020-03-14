@@ -1,0 +1,36 @@
+</br>
+
+<%= link_to "Add Question", new_question_path%>
+
+</br>
+
+<h3> Questions </h3>
+<hr/>
+<% @questions.all.each do |question|%>
+  </br>
+  <strong><%=question.question%></strong>
+  &nbsp; <%= link_to "View", question_path(question)%>
+  </br>
+  created by <%= link_to question.user.email, user_path(question.user)%>
+
+  <h5> Answers </h5>
+  <% question.answers.each do |answer|%>
+    <%= answer.answer %>
+     By 
+    <%= link_to answer.user.email, user_path(answer.user)%>
+    </br>
+    </br>
+  <%end%>
+  <%if current_user %>
+  <h5> Add your answer</h5>
+  <%= form_for [question, question.answers.build] do |ans|%>
+    <%= ans.text_field :answer%>
+    <%= ans.hidden_field :user_id, value: current_user.id%>
+    <%= ans.hidden_field :question_id, value: question.id%>
+
+    <%= ans.submit "Save"%>
+  <% end%>
+  <%end%>
+  <hr/>
+
+<%end%>
